@@ -1,7 +1,8 @@
 import Hero from "@/components/ui/Hero";
+import { generatePageTitle } from "@/src/shared/utils/metadata";
 
 export const metadata = {
-  title: "Meeti - Inicio",
+  title: generatePageTitle("Inicio"),
   description: "Aplicación para encontrar eventos y comunidades de interés",
 };
 
