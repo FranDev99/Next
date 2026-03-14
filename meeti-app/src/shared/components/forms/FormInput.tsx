@@ -9,7 +9,7 @@ export default function FormInput(props: Props) {
   return (
     <input
       {...props}
-      className={clsx("border-slate-200 w-full p-2", className)}
+      className={clsx("border-slate-400 w-full p-2", className)}
     />
   );
 }

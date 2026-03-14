@@ -6,13 +6,13 @@ export default function LoginForm() {
   return (
     <Form>
       <FormLabel htmlFor="email">E-mail</FormLabel>
-      <FormInput type="email" id="email" placeholder="Ingresa tu E-mail" />
+      <FormInput type="email" id="email" placeholder="Ingresa Tu E-mail" />
 
-      <FormLabel htmlFor="password">Password</FormLabel>
+      <FormLabel htmlFor="password">Contraseña</FormLabel>
       <FormInput
         type="password"
         id="password"
-        placeholder="Ingresa tu Password"
+        placeholder="Ingresa Tu Contraseña"
       />
       <FormSubmit value="Iniciar Sesión" />
     </Form>
