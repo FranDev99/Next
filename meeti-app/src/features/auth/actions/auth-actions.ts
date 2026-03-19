@@ -1,6 +1,7 @@
 'use server'
 
 import { SignUpInput, SingUpSchema } from "../schemas/authSchema";
+import { authService } from "../services/AuthService";
 
 export async function singUpAction(input: SignUpInput) {
     const data = SingUpSchema.safeParse(input)
@@ -11,4 +12,6 @@ export async function singUpAction(input: SignUpInput) {
             success: ''
         }
     }
+
+    await authService.register(data.data)
 }
