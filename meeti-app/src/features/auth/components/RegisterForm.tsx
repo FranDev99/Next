@@ -1,16 +1,27 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Form, FormInput, FormLabel, FormSubmit } from "@/components/forms";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormError,
+  FormInput,
+  FormLabel,
+  FormSubmit,
+} from "@/components/forms";
+import { SignUpInput, SingUpSchema } from "../schemas/authSchema";
+import { singUpAction } from "../actions/auth-actions";
 
 export default function RegisterForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: zodResolver(SingUpSchema), mode: "onBlur" });
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: SignUpInput) => {
+    await singUpAction(data);
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -22,6 +33,8 @@ export default function RegisterForm() {
         {...register("name")}
       />
 
+      {errors.name && <FormError>{errors.name.message}</FormError>}
+
       <FormLabel htmlFor="email">E-mail</FormLabel>
       <FormInput
         id="email"
@@ -29,6 +42,8 @@ export default function RegisterForm() {
         placeholder="Ingresa Tu E-mail"
         {...register("email")}
       />
+
+      {errors.email && <FormError>{errors.email.message}</FormError>}
 
       <FormLabel htmlFor="password">Contraseña</FormLabel>
       <FormInput
@@ -38,6 +53,8 @@ export default function RegisterForm() {
         {...register("password")}
       />
 
+      {errors.password && <FormError>{errors.password.message}</FormError>}
+
       <FormLabel htmlFor="password_confirmation">Repetir Contraseña</FormLabel>
       <FormInput
         id="password_confirmation"
@@ -45,6 +62,10 @@ export default function RegisterForm() {
         placeholder="Repite Tu Contraseña"
         {...register("passwordConfirmation")}
       />
+
+      {errors.passwordConfirmation && (
+        <FormError>{errors.passwordConfirmation.message}</FormError>
+      )}
 
       <FormSubmit value="Registrarme" />
     </Form>
