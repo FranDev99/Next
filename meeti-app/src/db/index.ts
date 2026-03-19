@@ -1,11 +1,5 @@
-import 'dotenv/config'
-import { defineConfig } from 'drizzle-kit'
+import { drizzle } from 'drizzle-orm/node-postgres'
 
-export default defineConfig({
-    out: './drizzle',
-    schema: './src/db/schema',
-    dialect: 'postgresql',
-    dbCredentials: {
-        url: process.env.DATABASE_URL!
-    }
+export const db = drizzle(process.env.DATABASE_URL!, {
+
 })
