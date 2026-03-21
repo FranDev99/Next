@@ -7,11 +7,19 @@ export const BaseAuthSchema = z.object({
     passwordConfirmation: z.string().trim().min(1, { error: 'La contraseña de confirmación no puede ir vacía' })
 })
 
-export const SingUpSchema = BaseAuthSchema.pick({
+export const SignUpSchema = BaseAuthSchema.pick({
     name: true,
     email: true,
     password: true,
     passwordConfirmation: true
 }).refine((data) => data.password === data.passwordConfirmation, { error: "Las contraseñas no son iguales", path: ['passwordConfirmation'] })
 
-export type SignUpInput = z.infer<typeof SingUpSchema>
+export const SignInSchema = BaseAuthSchema.pick({
+    email: true,
+}).extend({
+    password: z.string().trim().min(1, { error: 'La contraseña no puede ir vacía' }),
+})
+
+export type SignUpInput = z.infer<typeof SignUpSchema>
+
+export type SignInInput = z.infer<typeof SignInSchema>

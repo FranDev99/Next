@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormSubmit,
 } from "@/components/forms";
-import { SignUpInput, SingUpSchema } from "../schemas/authSchema";
+import { SignUpInput, SignUpSchema } from "../schemas/authSchema";
 import { singUpAction } from "../actions/auth-actions";
 
 export default function RegisterForm() {
@@ -19,7 +19,7 @@ export default function RegisterForm() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(SingUpSchema), mode: "onBlur" });
+  } = useForm({ resolver: zodResolver(SignUpSchema), mode: "onBlur" });
 
   const onSubmit = async (data: SignUpInput) => {
     const { error, success } = await singUpAction(data);
